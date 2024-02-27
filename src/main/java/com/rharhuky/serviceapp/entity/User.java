@@ -1,7 +1,15 @@
 package com.rharhuky.serviceapp.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -11,9 +19,13 @@ public class User {
     private Long id;
 
     private String name;
+
     private String lastName;
+
     private String cpf;
+
     private String contact;
+
     private Double renda;
 
     @OneToOne(mappedBy = "theUser")
