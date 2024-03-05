@@ -1,10 +1,9 @@
 package com.rharhuky.serviceapp.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@EqualsAndHashCode
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class ProposalResponse {
 
     private String contact;
 
-    private Double renda;
+    private Double income;
 
     private Double valueRequired;
 
@@ -29,5 +28,5 @@ public class ProposalResponse {
 
     private boolean approved;
 
-    private String observation;
+    private String details;
 }

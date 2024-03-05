@@ -19,10 +19,9 @@ public class ProposalRequest {
 
     private String contact;
 
-    private Double renda;
+    private Double income;
 
     private Double valueRequired;
 
     private int deadLineInMonths;
-
 }

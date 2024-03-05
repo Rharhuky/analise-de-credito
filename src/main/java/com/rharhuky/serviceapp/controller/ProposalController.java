@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/proposals")
+@RequestMapping(value = "/proposal")
 public class ProposalController {
 
-    private ProposalService proposalService;
+    private final ProposalService proposalService;
 
     @PostMapping
     public ResponseEntity<ProposalResponse> create(@RequestBody ProposalRequest proposalRequest) {

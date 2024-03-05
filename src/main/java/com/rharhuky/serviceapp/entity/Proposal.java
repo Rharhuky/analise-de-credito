@@ -1,11 +1,10 @@
 package com.rharhuky.serviceapp.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
+@EqualsAndHashCode
 @Setter
 @Getter
 @AllArgsConstructor
@@ -28,8 +27,7 @@ public class Proposal {
 
     private String details;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User theUser;
-
 }
