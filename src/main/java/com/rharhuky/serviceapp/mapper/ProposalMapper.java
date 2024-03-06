@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface ProposalMapper {
 
@@ -32,5 +34,8 @@ public interface ProposalMapper {
     @Mapping(target = "deadLineInMonths", source = "deadLineInMonths")
     @Mapping(target = "approved", source = "approved")
     @Mapping(target = "details", source = "details")
+    @Mapping(target = "income", source = "theUser.income")
     ProposalResponse convertToProposalResponse(Proposal proposal);
+
+    List<ProposalResponse> convertListToListResponse(List<Proposal> proposals);
 }

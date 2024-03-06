@@ -2,8 +2,6 @@ package com.rharhuky.serviceapp.dto;
 
 import lombok.*;
 
-@EqualsAndHashCode
-@ToString
 @Getter
 @Setter
 @AllArgsConstructor

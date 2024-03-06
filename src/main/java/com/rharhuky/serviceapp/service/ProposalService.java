@@ -7,6 +7,8 @@ import com.rharhuky.serviceapp.rempository.ProposalRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProposalService {
@@ -16,6 +18,11 @@ public class ProposalService {
     public ProposalResponse create(ProposalRequest proposalRequest){
         var theProposal = ProposalMapper.CONVERT.convertToProposal(proposalRequest);
         return ProposalMapper.CONVERT.convertToProposalResponse(proposalRepository.save(theProposal));
+    }
+
+    public List<ProposalResponse> findAll(){
+//        return ProposalMapper.CONVERT.convertListToListResponse(this.proposalRepository.findAll());
+        return null;
     }
 
 }
