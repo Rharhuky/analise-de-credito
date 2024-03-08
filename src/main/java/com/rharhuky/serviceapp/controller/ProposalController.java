@@ -1,7 +1,7 @@
 package com.rharhuky.serviceapp.controller;
 
-import com.rharhuky.serviceapp.dto.ProposalRequest;
-import com.rharhuky.serviceapp.dto.ProposalResponse;
+import com.rharhuky.serviceapp.dto.PropostaRequestDto;
+import com.rharhuky.serviceapp.dto.PropostaResponseDto;
 import com.rharhuky.serviceapp.service.ProposalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,23 +12,23 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/proposal")
+@RequestMapping(value = "/proposta")
 public class ProposalController {
 
     private final ProposalService proposalService;
 
     @PostMapping
-    public ResponseEntity<ProposalResponse> create(@RequestBody ProposalRequest proposalRequest) {
-        ProposalResponse proposalResponse = proposalService.create(proposalRequest);
+    public ResponseEntity<PropostaResponseDto> criar(@RequestBody PropostaRequestDto propostaRequestDto) {
+        PropostaResponseDto propostaResponseDto = proposalService.create(propostaRequestDto);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequestUri()
                         .path("/{id}")
-                        .buildAndExpand(proposalResponse.getId())
+                        .buildAndExpand(propostaResponseDto.getId())
                         .toUri())
-                .body(proposalResponse);
+                .body(propostaResponseDto);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProposalResponse>> getAll(){
+    public ResponseEntity<List<PropostaResponseDto>> obterProposta(){
         return ResponseEntity.ok().body(this.proposalService.findAll());
 
     }

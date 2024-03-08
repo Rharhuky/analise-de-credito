@@ -11,23 +11,23 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "proposals")
-public class Proposal {
+public class Proposta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double valueRequired;
+    private Double valorSolicitado;
 
-    private int deadLineInMonths;
+    private int prazoPagamento;
 
-    private Boolean approved;
+    private Boolean aprovado;
 
-    private boolean integrated;
+    private boolean integrado;
 
-    private String details;
+    private String observacao;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User theUser;
+    private User user;
 }
