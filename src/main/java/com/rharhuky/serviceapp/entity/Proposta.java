@@ -1,5 +1,6 @@
 package com.rharhuky.serviceapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,6 @@ public class Proposta {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonManagedReference
     private User user;
 }
