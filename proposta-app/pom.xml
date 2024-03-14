@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rharhuky</groupId>
-	<artifactId>service-app</artifactId>
+	<artifactId>proposta-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>service-app</name>
+	<name>proposta-app</name>
 	<description>Microserviço responsável pelo cadastro de Propostas</description>
 	<properties>
 		<java.version>17</java.version>
