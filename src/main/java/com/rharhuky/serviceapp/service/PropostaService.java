@@ -4,16 +4,16 @@ import com.rharhuky.serviceapp.dto.PropostaRequestDto;
 import com.rharhuky.serviceapp.dto.PropostaResponseDto;
 import com.rharhuky.serviceapp.entity.Proposta;
 import com.rharhuky.serviceapp.mapper.PropostaMapper;
-import com.rharhuky.serviceapp.repository.ProposalRepository;
+import com.rharhuky.serviceapp.repository.PropostaRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProposalService {
+public class PropostaService {
 
-    private ProposalRepository proposalRepository;
+    private PropostaRepository propostaRepository;
 
 
     private RabbitNotificationService rabbitNotificationService;
@@ -21,17 +21,17 @@ public class ProposalService {
     private String exchange;
 
 
-    public ProposalService(ProposalRepository proposalRepository,
+    public PropostaService(PropostaRepository propostaRepository,
                            RabbitNotificationService rabbitNotificationService,
                            @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
-        this.proposalRepository = proposalRepository;
+        this.propostaRepository = propostaRepository;
         this.rabbitNotificationService = rabbitNotificationService;
         this.exchange = exchange;
     }
 
     public PropostaResponseDto create(PropostaRequestDto propostaRequestDto){
         var theProposal = PropostaMapper.CONVERT.convertToProposta(propostaRequestDto);
-        proposalRepository.save(theProposal);
+        propostaRepository.save(theProposal);
         notifyQueues(theProposal);
         return PropostaMapper.CONVERT.convertToPropostaResponseDto(theProposal);
     }
@@ -42,12 +42,12 @@ public class ProposalService {
         }
         catch (RuntimeException runtimeException){
             proposta.setIntegrado(false);
-            proposalRepository.save(proposta);
+            propostaRepository.save(proposta);
         }
     }
 
     public List<PropostaResponseDto> findAll(){
-        return PropostaMapper.CONVERT.convertListToListResponse(this.proposalRepository.findAll());
+        return PropostaMapper.CONVERT.convertListToListResponse(this.propostaRepository.findAll());
     }
 
 }
