@@ -1,4 +1,4 @@
-package domain;
+package com.rharhuky.notificationapp.domain;
 
 
 import lombok.*;
