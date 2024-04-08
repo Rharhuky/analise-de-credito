@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class SnsService {
 
     public void notificar(String message){
-
+        // TODO
     }
 }

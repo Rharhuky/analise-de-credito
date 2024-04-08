@@ -27,7 +27,8 @@ public class SnsConfiguration {
     @Bean
     public AmazonSNS amazonSNS(){
         return AmazonSNSClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials())).withRegion(Regions.SA_EAST_1)
+                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials()))
+                .withRegion(Regions.SA_EAST_1)
                 .build();
     }
 
