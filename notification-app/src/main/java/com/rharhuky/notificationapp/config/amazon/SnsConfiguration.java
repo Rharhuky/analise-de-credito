@@ -16,7 +16,7 @@ public class SnsConfiguration {
     @Value(value = "${aws.accessKey}")
     private String accessKey;
 
-    @Value(value = "${aws.accessKey}")
+    @Value(value = "${aws.secretKey}")
     private String secretKey;
 
     @Bean
@@ -28,7 +28,7 @@ public class SnsConfiguration {
     public AmazonSNS amazonSNS(){
         return AmazonSNSClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials()))
-                .withRegion(Regions.SA_EAST_1)
+                .withRegion(Regions.US_EAST_1)
                 .build();
     }
 
