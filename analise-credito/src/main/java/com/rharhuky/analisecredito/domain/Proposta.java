@@ -1,0 +1,23 @@
+package com.rharhuky.analisecredito.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class Proposta {
+
+    private Long id;
+
+    private Double valorSolicitado;
+
+    private int prazoPagamento;
+
+    private Boolean aprovado;
+
+    private boolean integrado;
+
+    private String observacao;
+
+    private User user;
+}
