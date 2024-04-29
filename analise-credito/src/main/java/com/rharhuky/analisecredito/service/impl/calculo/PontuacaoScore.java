@@ -1,10 +1,14 @@
-package com.rharhuky.analisecredito.service.calculo.impl;
+package com.rharhuky.analisecredito.service.impl.calculo;
 
 import com.rharhuky.analisecredito.domain.Proposta;
-import com.rharhuky.analisecredito.service.calculo.CalculoPonto;
+import com.rharhuky.analisecredito.service.interfaces.calculo.CalculoPonto;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+@Service
+@Order(value = 2)
 public class PontuacaoScore implements CalculoPonto {
 
     @Override

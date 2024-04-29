@@ -1,8 +1,10 @@
-package com.rharhuky.analisecredito.service.calculo.impl;
+package com.rharhuky.analisecredito.service.impl.calculo;
 
 import com.rharhuky.analisecredito.domain.Proposta;
-import com.rharhuky.analisecredito.service.calculo.CalculoPonto;
+import com.rharhuky.analisecredito.service.interfaces.calculo.CalculoPonto;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Renda implements CalculoPonto {
 
     @Override

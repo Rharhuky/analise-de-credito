@@ -1,4 +1,4 @@
-package com.rharhuky.analisecredito.service.calculo;
+package com.rharhuky.analisecredito.service.interfaces.calculo;
 
 import com.rharhuky.analisecredito.domain.Proposta;
 
