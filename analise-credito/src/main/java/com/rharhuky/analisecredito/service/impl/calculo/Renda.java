@@ -1,6 +1,7 @@
 package com.rharhuky.analisecredito.service.impl.calculo;
 
 import com.rharhuky.analisecredito.domain.Proposta;
+import com.rharhuky.analisecredito.exceptions.CalculoException;
 import com.rharhuky.analisecredito.service.interfaces.calculo.CalculoPonto;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +10,8 @@ public class Renda implements CalculoPonto {
 
     @Override
     public int calcular(Proposta proposta) {
-        if (proposta.getUser().getRenda() < proposta.getValorSolicitado())
-            throw new RuntimeException("Valor fora dos limites");
+        if (proposta.getUser().getRenda() <  0.1 * proposta.getValorSolicitado())
+            throw new CalculoException();
         return percentualDeRendaSobreValorSolicitado(proposta.getUser().getRenda(), proposta.getValorSolicitado());
 
     }
