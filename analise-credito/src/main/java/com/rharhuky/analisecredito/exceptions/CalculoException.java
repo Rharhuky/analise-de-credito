@@ -2,6 +2,6 @@ package com.rharhuky.analisecredito.exceptions;
 
 import com.rharhuky.analisecredito.annotations.AnaliseException;
 
-@AnaliseException(value = "${messages.exceptions.calculo}")
+@AnaliseException(value = "exceptions.calculo")
 public class CalculoException extends RuntimeException {
 }
