@@ -4,6 +4,6 @@ import com.rharhuky.analisecredito.domain.Proposta;
 
 public interface AnaliseService {
 
-    int calcular(Proposta proposta);
+    void calcular(Proposta proposta);
 
 }
