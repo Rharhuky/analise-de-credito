@@ -11,6 +11,9 @@ public class MsPropostaNotificationConfig {
     @Value("${rabbitmq.propostaconcluida.exchange}")
     private String exchangePropostaConcluida;
 
+    @Value("${rabbitmq.queue.proposta-concluida}")
+    private String queuePropostaConcluidaMsProposta;
+
     @Bean
     public FanoutExchange createFannoutExchangePropostaConcluida(){
         return ExchangeBuilder.fanoutExchange(exchangePropostaConcluida).build();
@@ -34,7 +37,7 @@ public class MsPropostaNotificationConfig {
     }
     @Bean
     public Queue createQueuePropostaConcluidaMSProposta(){
-        return QueueBuilder.durable("proposta-concluida.ms-proposta").build();
+        return QueueBuilder.durable(queuePropostaConcluidaMsProposta).build();
     }
 
 
