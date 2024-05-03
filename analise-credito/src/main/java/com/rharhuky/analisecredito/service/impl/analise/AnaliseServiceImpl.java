@@ -8,11 +8,11 @@ import com.rharhuky.analisecredito.service.interfaces.calculo.CalculoPonto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 @Service
@@ -30,6 +30,7 @@ public class AnaliseServiceImpl implements AnaliseService {
     @Autowired
     private NotificationRabbitMQService notificationRabbitMQService;
 
+    @Autowired
     private MessageSource messageSource;
 
 
@@ -45,7 +46,7 @@ public class AnaliseServiceImpl implements AnaliseService {
         catch (Exception exception){
             AnaliseException analiseException = AnnotationUtils.findAnnotation(exception.getClass(), AnaliseException.class);
             if(Objects.nonNull(analiseException)){
-                var message = messageSource.getMessage(analiseException.value(), null, LocaleContextHolder.getLocale());
+                var message = messageSource.getMessage(analiseException.value(), null, new Locale("pt", "Brazil"));
                 proposta.setObservacao(message);
             }
             proposta.setAprovado(false);
