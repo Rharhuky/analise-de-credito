@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MsPropostaNotificationConfig {
+public class MsAnaliseConfig {
 
-    @Value("${rabbitmq.propostaconcluida.exchange}")
+    @Value("${rabbitmq.queue.proposta-concluida.exchange}")
     private String exchangePropostaConcluida;
 
-    @Value("${rabbitmq.queue.proposta-concluida}")
+    @Value("${rabbitmq.queue.proposta-concluida-ms-proposta}")
     private String queuePropostaConcluidaMsProposta;
+
+    @Value("${rabbitmq.queue.proposta-concluida-ms-notificacao}")
+    private String queuePropostaConcluidaMsNotificacao;
 
     @Bean
     public FanoutExchange createFannoutExchangePropostaConcluida(){
@@ -33,12 +36,12 @@ public class MsPropostaNotificationConfig {
 
     @Bean
     public Queue createQueuePropostaConcluidaMSNotificacao(){
-        return QueueBuilder.durable("proposta-concluida.ms-notificacao").build();
+        return QueueBuilder.durable(queuePropostaConcluidaMsNotificacao).build();
     }
+
     @Bean
     public Queue createQueuePropostaConcluidaMSProposta(){
         return QueueBuilder.durable(queuePropostaConcluidaMsProposta).build();
     }
-
 
 }

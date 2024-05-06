@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/proposta")
-public class PropostaConstroller {
+public class PropostaController {
 
     private final PropostaService propostaService;
 

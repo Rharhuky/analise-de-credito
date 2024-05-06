@@ -18,7 +18,7 @@ import java.util.Objects;
 @Service
 public class AnaliseServiceImpl implements AnaliseService {
 
-    @Value(value = "${app.pontuacao.minima}")
+    @Value(value = "${analise.pontuacao.minima}")
     private int pontuacaoMinima;
 
     @Value(value = "${rabbitmq.exchange.proposta.concluida}")
@@ -32,7 +32,6 @@ public class AnaliseServiceImpl implements AnaliseService {
 
     @Autowired
     private MessageSource messageSource;
-
 
     @Override
     public void calcular(Proposta proposta) {

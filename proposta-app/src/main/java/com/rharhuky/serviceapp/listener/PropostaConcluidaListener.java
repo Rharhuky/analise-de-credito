@@ -16,7 +16,7 @@ public class PropostaConcluidaListener {
 
     private final WebSocketService webSocketService;
 
-    @RabbitListener(queues = "${rabbitmq.queue.proposta-concluida}")
+    @RabbitListener(queues = "${rabbitmq.queue.proposta-concluida-ms-proposta}")
     public void concluirProposta(Proposta proposta){
         propostaRepository.save(proposta);
         webSocketService.notificar(PropostaMapper.CONVERT.convertToPropostaResponseDto(proposta));

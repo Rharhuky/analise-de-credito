@@ -6,20 +6,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfiguration {
+public class QueueExchangeConfig {
 
-    @Value("${rabbitmq.propostapendente.exchange}")
+    @Value("${rabbitmq.proposta-pendente.exchange}")
     private String exchangePropostaPendente;
 
+    @Value("${rabbitmq.queue.proposta-pendente-ms-analise-credito}")
+    private String queuePropostaPendenteMsAnaliseCredito;
+
+    @Value("${rabbitmq.queue.proposta-pendente-ms-notificacao}")
+    private String queuePropostaPendenteMsNotificacao;
 
     @Bean
     public Queue createQueuePropostaPendenteMSAnaliseCredito(){
-        return QueueBuilder.durable("proposta-pendente.ms-analise-credito").build();
+        return QueueBuilder.durable(queuePropostaPendenteMsAnaliseCredito).build();
     }
 
     @Bean
     public Queue createQueuePropostaPendenteMSNotificacao(){
-        return QueueBuilder.durable("proposta-pendente.ms-notificacao").build();
+        return QueueBuilder.durable(queuePropostaPendenteMsNotificacao).build();
     }
 
     @Bean

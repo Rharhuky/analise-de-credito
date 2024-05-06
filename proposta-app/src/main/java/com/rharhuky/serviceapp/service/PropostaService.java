@@ -15,7 +15,6 @@ public class PropostaService {
 
     private PropostaRepository propostaRepository;
 
-
     private RabbitNotificationService rabbitNotificationService;
 
     private String exchange;

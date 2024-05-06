@@ -1,4 +1,4 @@
-package com.rharhuky.serviceapp.agendador;
+package com.rharhuky.serviceapp.scheduler;
 
 import com.rharhuky.serviceapp.entity.Proposta;
 import com.rharhuky.serviceapp.repository.PropostaRepository;
@@ -19,25 +19,25 @@ public class PropostaSemIntegracao {
 
     private RabbitNotificationService rabbitNotificationService;
 
-    private String exchange;
+    private String propostaPendenteExchange;
 
 
     public PropostaSemIntegracao(PropostaRepository propostaRepository,
                                  RabbitNotificationService rabbitNotificationService,
                                  @Value("${rabbitmq.propostapendente.exchange}")
-                                 String exchange) {
+                                 String propostaPendenteExchange) {
         this.propostaRepository = propostaRepository;
         this.rabbitNotificationService = rabbitNotificationService;
-        this.exchange = exchange;
+        this.propostaPendenteExchange = propostaPendenteExchange;
     }
 
-    @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
+    @Scheduled(fixedDelay = 5, timeUnit = TimeUnit.SECONDS)
     public void buscarPropostasNaoIntegradas(){
         propostaRepository.findAllByIntegradoIsFalse().forEach(proposta -> {
             try{
-                rabbitNotificationService.notifyRabbitMqQueue(proposta, exchange);
+                rabbitNotificationService.notifyRabbitMqQueue(proposta, propostaPendenteExchange);
                 atualizarProposta(proposta);
-                log.info("Send with Sucess");
+                log.info("Send with Success");
             }
             catch (RuntimeException exception){
                 log.error(exception.getMessage());
