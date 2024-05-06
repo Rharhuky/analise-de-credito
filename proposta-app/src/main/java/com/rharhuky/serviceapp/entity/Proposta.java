@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
-@EqualsAndHashCode
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "proposals")
+@Table(name = "propostas")
 public class Proposta {
 
     @Id
