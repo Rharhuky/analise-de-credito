@@ -11,11 +11,8 @@ public class WebSocketService {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-
     public void notificar(PropostaResponseDto propostaResponseDto){
-        simpMessagingTemplate.convertAndSend("/propostas", propostaResponseDto);
-
-
+        simpMessagingTemplate.convertAndSend("/proposta", propostaResponseDto);
     }
 
 }
