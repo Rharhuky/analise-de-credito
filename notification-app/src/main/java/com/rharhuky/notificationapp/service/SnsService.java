@@ -11,10 +11,13 @@ public class SnsService {
 
     private final AmazonSNS amazonSNS;
 
-    public void notificar(String message, String telefone){
-        PublishRequest publishRequest = new PublishRequest()
-                .withMessage(message)
-                .withPhoneNumber(telefone);
+    public void notificar(PublishRequest publishRequest){
         amazonSNS.publish(publishRequest);
+    }
+
+    public PublishRequest createPublishRequest(String message, String phone){
+        return new PublishRequest()
+                .withMessage(message)
+                .withPhoneNumber(phone);
     }
 }
