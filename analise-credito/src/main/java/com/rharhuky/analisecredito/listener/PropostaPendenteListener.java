@@ -12,7 +12,7 @@ public class PropostaPendenteListener {
 
     private final AnaliseService analiseService;
 
-    @RabbitListener(queues = {"${rabbitmq.queue.proposta-pendente}"})
+    @RabbitListener(queues = {"${rabbitmq.queue.proposta-pendente-ms-analise-credito}"})
     public void propostaEmAnalise(Proposta proposta){
         analiseService.calcular(proposta);
     }

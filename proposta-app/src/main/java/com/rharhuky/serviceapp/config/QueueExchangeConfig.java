@@ -19,12 +19,29 @@ public class QueueExchangeConfig {
 
     @Bean
     public Queue createQueuePropostaPendenteMSAnaliseCredito(){
-        return QueueBuilder.durable(queuePropostaPendenteMsAnaliseCredito).build();
+        return QueueBuilder.durable(queuePropostaPendenteMsAnaliseCredito)
+                .deadLetterExchange("proposta-pendente-dlx.ex")
+                .build();
     }
 
     @Bean
     public Queue createQueuePropostaPendenteMSNotificacao(){
         return QueueBuilder.durable(queuePropostaPendenteMsNotificacao).build();
+    }
+
+    @Bean
+    public Queue criarFilaPropostaPendenteDlq() {
+        return QueueBuilder.durable("proposta-pendente.dlq").build();
+    }
+
+    @Bean
+    public Binding criarBinding(){
+        return BindingBuilder.bind(criarFilaPropostaPendenteDlq()).to(deadLetterExchange());
+    }
+
+    @Bean
+    public FanoutExchange deadLetterExchange() {
+        return ExchangeBuilder.fanoutExchange("proposta-pendente-dlx.ex").build();
     }
 
     @Bean
@@ -42,6 +59,5 @@ public class QueueExchangeConfig {
         return BindingBuilder.bind(createQueuePropostaPendenteMSNotificacao()).
                 to(createFannoutExchangePropostaPendente());
     }
-
 
 }
