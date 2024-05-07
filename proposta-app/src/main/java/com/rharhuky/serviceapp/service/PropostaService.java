@@ -40,7 +40,7 @@ public class PropostaService {
             rabbitNotificationService.notifyRabbitMqQueue(proposta, exchange);
         }
         catch (RuntimeException runtimeException){
-            proposta.setIntegrado(false);
+            proposta.setIntegrada(false);
             propostaRepository.save(proposta);
         }
     }

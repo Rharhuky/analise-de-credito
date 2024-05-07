@@ -33,7 +33,7 @@ public class PropostaSemIntegracao {
 
     @Scheduled(fixedDelay = 5, timeUnit = TimeUnit.SECONDS)
     public void buscarPropostasNaoIntegradas(){
-        propostaRepository.findAllByIntegradoIsFalse().forEach(proposta -> {
+        propostaRepository.findAllByIntegradaIsFalse().forEach(proposta -> {
             try{
                 rabbitNotificationService.notifyRabbitMqQueue(proposta, propostaPendenteExchange);
                 atualizarProposta(proposta);
@@ -47,7 +47,7 @@ public class PropostaSemIntegracao {
 
     @Transactional
     private void atualizarProposta(Proposta proposta){
-        proposta.setIntegrado(true);
+        proposta.setIntegrada(true);
         propostaRepository.save(proposta);
     }
 }

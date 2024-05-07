@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "propostas")
 public class Proposta {
 
     @Id
@@ -20,9 +19,9 @@ public class Proposta {
 
     private int prazoPagamento;
 
-    private Boolean aprovado;
+    private Boolean aprovada;
 
-    private boolean integrado;
+    private boolean integrada;
 
     private String observacao;
 

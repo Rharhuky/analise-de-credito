@@ -13,9 +13,9 @@ public class Proposta {
 
     private int prazoPagamento;
 
-    private Boolean aprovado;
+    private Boolean aprovada;
 
-    private boolean integrado;
+    private boolean integrada;
 
     private String observacao;
 
