@@ -18,7 +18,7 @@ import java.util.Objects;
 @Service
 public class AnaliseServiceImpl implements AnaliseService {
 
-    @Value(value = "${analise.pontuacao.minima}")
+    @Value(value = "${analise.pontuacao-minima}")
     private int pontuacaoMinima;
 
     @Value(value = "${rabbitmq.exchange.proposta.concluida}")
@@ -40,7 +40,7 @@ public class AnaliseServiceImpl implements AnaliseService {
                     .stream()
                     .mapToInt(calculoPonto -> calculoPonto.calcular(proposta))
                     .sum();
-            proposta.setAprovado(pontuacao > pontuacaoMinima);
+            proposta.setAprovada(pontuacao > pontuacaoMinima);
         }
         catch (Exception exception){
             AnaliseException analiseException = AnnotationUtils.findAnnotation(exception.getClass(), AnaliseException.class);
@@ -48,7 +48,7 @@ public class AnaliseServiceImpl implements AnaliseService {
                 var message = messageSource.getMessage(analiseException.value(), null, new Locale("pt", "Brazil"));
                 proposta.setObservacao(message);
             }
-            proposta.setAprovado(false);
+            proposta.setAprovada(false);
         }
         notificationRabbitMQService.notificar(exchangePropostaConcluida, proposta);
     }
