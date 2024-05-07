@@ -19,10 +19,10 @@ public class PropostaListener {
         notificar(message, proposta.getUser().getTelefone());
     }
 
-    @RabbitListener(queues = "${rabbitmq.queue.proposta-concluida-ms-notificacao}")
+    @RabbitListener(queues = "${rabbitmq.queue.proposta.concluida-ms-notificacao}")
     public void propostaConcluida(Proposta proposta){
         String messageResponse;
-        if(proposta.getAprovado()){
+        if(proposta.getAprovada()){
             messageResponse = String.format(MensagemConstants.PROPOSTA_APROVADA, proposta.getUser().getNome());
         }
         else

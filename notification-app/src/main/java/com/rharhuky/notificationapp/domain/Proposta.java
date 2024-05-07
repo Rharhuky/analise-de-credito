@@ -13,7 +13,7 @@ public class Proposta {
 
     private int prazoPagamento;
 
-    private Boolean aprovado;
+    private Boolean aprovada;
 
     private boolean integrada;
 
