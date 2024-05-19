@@ -27,6 +27,8 @@ public class QueueExchangeConfig {
     public Queue createQueuePropostaPendenteMSAnaliseCredito(){
         return QueueBuilder.durable(queuePropostaPendenteMsAnaliseCredito)
                 .deadLetterExchange(dlxPropostaPendente)
+                .maxLength(10L)
+                .ttl(10000)
                 .build();
     }
 
