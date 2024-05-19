@@ -1,7 +1,7 @@
-package com.rharhuky.notificationapp.domain;
+package com.rharhuky.analisecredito.domain;
 
-
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Setter
 @Getter
@@ -21,4 +21,3 @@ public class Proposta {
 
     private User user;
 }
-

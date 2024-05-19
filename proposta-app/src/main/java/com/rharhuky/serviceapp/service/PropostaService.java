@@ -15,7 +15,6 @@ public class PropostaService {
 
     private PropostaRepository propostaRepository;
 
-
     private RabbitNotificationService rabbitNotificationService;
 
     private String exchange;
@@ -41,7 +40,7 @@ public class PropostaService {
             rabbitNotificationService.notifyRabbitMqQueue(proposta, exchange);
         }
         catch (RuntimeException runtimeException){
-            proposta.setIntegrado(false);
+            proposta.setIntegrada(false);
             propostaRepository.save(proposta);
         }
     }

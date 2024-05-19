@@ -4,14 +4,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
-@EqualsAndHashCode
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "proposals")
 public class Proposta {
 
     @Id
@@ -22,9 +19,9 @@ public class Proposta {
 
     private int prazoPagamento;
 
-    private Boolean aprovado;
+    private Boolean aprovada;
 
-    private boolean integrado;
+    private boolean integrada;
 
     private String observacao;
 
