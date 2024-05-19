@@ -17,10 +17,16 @@ public class QueueExchangeConfig {
     @Value("${rabbitmq.queue.proposta-pendente-ms-notificacao}")
     private String queuePropostaPendenteMsNotificacao;
 
+    @Value("${rabbitmq.exchange.proposta-pendente-dlx.ex}")
+    private String dlxPropostaPendente;
+
+    @Value(value = "${rabbitmq.queue.proposta-pendente.dlq}")
+    private String queuePropostaPendenteDlq;
+
     @Bean
     public Queue createQueuePropostaPendenteMSAnaliseCredito(){
         return QueueBuilder.durable(queuePropostaPendenteMsAnaliseCredito)
-                .deadLetterExchange("proposta-pendente-dlx.ex")
+                .deadLetterExchange(dlxPropostaPendente)
                 .build();
     }
 
@@ -31,17 +37,19 @@ public class QueueExchangeConfig {
 
     @Bean
     public Queue criarFilaPropostaPendenteDlq() {
-        return QueueBuilder.durable("proposta-pendente.dlq").build();
+        return QueueBuilder
+                .durable(queuePropostaPendenteDlq)
+                .build();
+    }
+
+    @Bean
+    public FanoutExchange deadLetterExchange() {
+        return ExchangeBuilder.fanoutExchange(dlxPropostaPendente).build();
     }
 
     @Bean
     public Binding criarBinding(){
         return BindingBuilder.bind(criarFilaPropostaPendenteDlq()).to(deadLetterExchange());
-    }
-
-    @Bean
-    public FanoutExchange deadLetterExchange() {
-        return ExchangeBuilder.fanoutExchange("proposta-pendente-dlx.ex").build();
     }
 
     @Bean
