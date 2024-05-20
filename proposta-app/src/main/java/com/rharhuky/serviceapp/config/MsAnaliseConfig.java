@@ -17,6 +17,12 @@ public class MsAnaliseConfig {
     @Value("${rabbitmq.queue.proposta-concluida-ms-notificacao}")
     private String queuePropostaConcluidaMsNotificacao;
 
+    @Value(value = "${rabbitmq.queue.proposta-concluida.dlq}")
+    private String propostaConcluidaDlq;
+
+    @Value(value = "${rabbitmq.exchange.proposta-concluida-dlx.ex}")
+    private String dlxPropostaConcluida;
+
     @Bean
     public FanoutExchange createFannoutExchangePropostaConcluida(){
         return ExchangeBuilder.fanoutExchange(exchangePropostaConcluida).build();
@@ -36,12 +42,38 @@ public class MsAnaliseConfig {
 
     @Bean
     public Queue createQueuePropostaConcluidaMSNotificacao(){
-        return QueueBuilder.durable(queuePropostaConcluidaMsNotificacao).build();
+        return QueueBuilder.durable(queuePropostaConcluidaMsNotificacao)
+//                .deadLetterExchange(dlxPropostaConcluida)
+                .build();
     }
 
     @Bean
     public Queue createQueuePropostaConcluidaMSProposta(){
-        return QueueBuilder.durable(queuePropostaConcluidaMsProposta).build();
+        return QueueBuilder
+                .durable(queuePropostaConcluidaMsProposta)
+                .deadLetterExchange(dlxPropostaConcluida)
+                .build();
+    }
+
+    @Bean
+    public Queue createQueuePropostaConcluidaDlq(){
+        return QueueBuilder
+                .durable(propostaConcluidaDlq)
+                .build();
+    }
+
+    @Bean
+    public Binding createBindingPropostaConcluidaDlq(){
+        return BindingBuilder
+                .bind(createQueuePropostaConcluidaDlq())
+                .to(deadLetterQueuePropostaConcluidaExchange());
+    }
+
+    @Bean
+    public FanoutExchange deadLetterQueuePropostaConcluidaExchange(){
+        return ExchangeBuilder
+                .fanoutExchange(dlxPropostaConcluida)
+                .build();
     }
 
 }

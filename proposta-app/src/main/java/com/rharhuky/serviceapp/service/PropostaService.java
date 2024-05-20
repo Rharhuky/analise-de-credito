@@ -5,6 +5,7 @@ import com.rharhuky.serviceapp.dto.PropostaResponseDto;
 import com.rharhuky.serviceapp.entity.Proposta;
 import com.rharhuky.serviceapp.mapper.PropostaMapper;
 import com.rharhuky.serviceapp.repository.PropostaRepository;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,19 @@ public class PropostaService {
     public PropostaResponseDto create(PropostaRequestDto propostaRequestDto){
         var theProposal = PropostaMapper.CONVERT.convertToProposta(propostaRequestDto);
         propostaRepository.save(theProposal);
-        notifyQueues(theProposal);
+
+        MessagePostProcessor messagePostProcessor = message -> {
+          message.getMessageProperties().setPriority(calcularPrioridade(theProposal));
+          return message;
+        };
+
+        notifyQueues(theProposal, messagePostProcessor);
         return PropostaMapper.CONVERT.convertToPropostaResponseDto(theProposal);
     }
 
-    private void notifyQueues(Proposta proposta){
+    private void notifyQueues(Proposta proposta, MessagePostProcessor messagePostProcessor){
         try{
-            rabbitNotificationService.notifyRabbitMqQueue(proposta, exchange);
+            rabbitNotificationService.notifyRabbitMqQueue(proposta, exchange, messagePostProcessor);
         }
         catch (RuntimeException runtimeException){
             proposta.setIntegrada(false);
@@ -47,6 +54,10 @@ public class PropostaService {
 
     public List<PropostaResponseDto> findAll(){
         return PropostaMapper.CONVERT.convertListToListResponse(this.propostaRepository.findAll());
+    }
+
+    private int calcularPrioridade(Proposta proposta){
+        return proposta.getUser().getRenda() > 10000 ? 5 : 1;
     }
 
 }
